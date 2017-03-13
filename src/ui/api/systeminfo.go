@@ -71,14 +71,11 @@ func (sia *SystemInfoAPI) GetVolumeInfo() {
 
 //GetCert gets default self-signed certificate.
 func (sia *SystemInfoAPI) GetCert() {
-	if sia.isAdmin {
-		if _, err := os.Stat(defaultRootCert); !os.IsNotExist(err) {
-			sia.Ctx.Output.Header("Content-Disposition", "attachment; filename=ca.crt")
-			http.ServeFile(sia.Ctx.ResponseWriter, sia.Ctx.Request, defaultRootCert)
-		} else {
-			log.Error("No certificate found.")
-			sia.CustomAbort(http.StatusNotFound, "No certificate found.")
-		}
+	if _, err := os.Stat(defaultRootCert); !os.IsNotExist(err) {
+		sia.Ctx.Output.Header("Content-Disposition", "attachment; filename=ca.crt")
+		http.ServeFile(sia.Ctx.ResponseWriter, sia.Ctx.Request, defaultRootCert)
+	} else {
+		log.Error("No certificate found.")
+		sia.CustomAbort(http.StatusNotFound, "No certificate found.")
 	}
-	sia.CustomAbort(http.StatusUnauthorized, "")
 }

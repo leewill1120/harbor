@@ -25,7 +25,10 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-harbor-navbar-collapse-1">
-		  <optional-menu version="{{.Version}}" language="{{.Lang}}" show-download-cert="{{.ShowDownloadCert}}"  login-status="//vm.loginStatus//"></optional-menu>     
+		  <optional-menu version="{{.Version}}" language="{{.Lang}}" show-download-cert="{{.ShowDownloadCert}}"  login-status="//vm.loginStatus//"></optional-menu>
+        <a role="button" class="btn btn-link ng-binding" style="color:white;" data-toggle="tooltip" title="下载该证书到docker所在服务器的/etc/docker/certs.d/docker.hscloud.cn目录下（目录不存在请手动创建）" href="/api/systeminfo/getcert">
+            <span class="glyphicon glyphicon-certificate"></span>&nbsp;&nbsp;根证书
+        </a>
 	    <ul class="nav navbar-nav navbar-right">
 		    <li>
 		      <navigation-header></navigation-header>

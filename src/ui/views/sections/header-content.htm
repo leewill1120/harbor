@@ -25,10 +25,7 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-harbor-navbar-collapse-1">
-		  <optional-menu version="{{.Version}}" language="{{.Lang}}" show-download-cert="{{.ShowDownloadCert}}"  login-status="//vm.loginStatus//"></optional-menu>
-        <a role="button" class="btn btn-link ng-binding" style="color:white;" data-toggle="tooltip" title="下载该证书到docker所在服务器的/etc/docker/certs.d/docker.hscloud.cn目录下（目录不存在请手动创建）" href="/api/systeminfo/getcert">
-            <span class="glyphicon glyphicon-certificate"></span>&nbsp;&nbsp;根证书
-        </a>
+	    <optional-menu version="{{.Version}}" language="{{.Lang}}" show-download-cert="{{.ShowDownloadCert}}"  login-status="//vm.loginStatus//"></optional-menu>     
 	    <ul class="nav navbar-nav navbar-right">
 		    <li>
 		      <navigation-header></navigation-header>
@@ -37,6 +34,38 @@
 	        <search-input search-input='vm.searchInput'></search-input>
 		    </li>
 	    </ul>
+
+		<a role="button" class="btn btn-link ng-binding" style="color:white; text-decoration:none;" data-toggle="modal" data-target="#rootCertModal">
+			  <span class="glyphicon glyphicon-certificate"></span>&nbsp;&nbsp;根证书
+		</a>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="rootCertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							镜像中心根证书
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div>使用说明</div>
+						<ul>
+							<li>docker 1.12+版本：下载证书到docker所在服务器的/etc/docker/certs.d/docker.hscloud.cn目录下（目录不存在请手动创建）</li>
+							<li>docker 1.11及以下版本：docker daemon增加启动参数--tlscacert=/path/ca.crt，然后重启docker daemon</li>
+						</ul>
+						<div>点击<a href="/api/systeminfo/getcert">这里</a>下载证书</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

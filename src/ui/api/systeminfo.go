@@ -34,6 +34,11 @@ type Storage struct {
 
 // Prepare for validating user if an admin.
 func (sia *SystemInfoAPI) Prepare() {
+	_, action := sia.GetControllerAndAction()
+	if "GetCert" == action{
+		return
+	}
+
 	sia.currentUserID = sia.ValidateUser()
 
 	var err error
